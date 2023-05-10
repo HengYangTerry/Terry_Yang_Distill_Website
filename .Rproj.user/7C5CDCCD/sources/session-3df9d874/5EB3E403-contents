@@ -1,0 +1,19 @@
+---
+title: "League of Legends Esports"
+description: |
+  League of Legends introduction.
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+League of Legends is a game published by Riot Games in 2009. This is one of the biggest team-based game with 163 champions to play with. Each champion has its own category and role in the game, categories including assassins, fighters, mages, marksmen, supports and tanks, and roles including top, jungle, middle, bottom and supports, where one's category is fixed and role is not. In each game, consist of 10 players, divided into two teams of 5 players, blue team and red team, each player has a role in the team, either top, jungle, middle, bottom or support.
+
+In a game, two teams of five players battle in player-versus-player combat, each team occupying and defending their half of the map. Each of the ten players controls a character, known as a "champion", with unique abilities and differing styles of play. During a match, champions become more powerful by collecting experience points, earning gold, and purchasing items to defeat the opposing team. In League's main mode, Summoner's Rift, a team wins by pushing through to the enemy base and destroying their "Nexus", a large structure located within.
+
+This is a multiplayer online battle arena (MOBA) game. As of now, season 13 of this game, there are total of 163 champions available to play. Over the course of a match, champions gain levels by accruing experience points (XP) through killing enemies. Items can be acquired to increase champions' strength, and are bought with gold, which players accrue passively over time and earn actively by defeating the opposing team's minions, champions, or defensive structures. In League of Legend Pro League, Summoner's Rift, items are purchased through a shop menu available to players only when their champion is in the team's base. Each game is discrete; levels and items do not transfer from one game to another.
+
+![League of Legends Game Map](/Users/hengyang/Desktop/MATH 230/Distill Website/Terry_Yang_Distill_Website/LOLmap.png)
+
+In this website, I am working with the League of Legends Pro League data from Season 12, which is last season, to find out the champions' strength, and priority last year.

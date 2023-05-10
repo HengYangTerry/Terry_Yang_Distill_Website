@@ -1,0 +1,14 @@
+---
+title: "Confidence Level Introduction"
+description: |
+  Interactive confidence levels and confidence interval introduction.
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+Statistical Inference is the process of drawing conclusions about the population based only on information in the sample. We want to choose the statistic that is the best estimator of the parameter as our estimator. Statistics are random variables and we refer to their distributions as sampling distributions.A sampling distribution is the distribution of a statistic calculated from all possible samples of the same size from the population. It shows us how the sample statistic varies from sample to sample.The sampling distribution of a statistic is characterized by a certain shape, mean, and standard error. Because an estimate is a single number, and by itself it does not provide information about the precision and reliability of the estimate. An alternative to reporting a single value for the parameter being estimated, is to report an interval estimate that provides a plausible range of values for the population parameter. This range of values should account for the precision and reliability of the single point estimate based on the distribution from which it came. A confidence interval for a parameter is an interval computed from a random sample of data by a method that will capture the true parameter for a specified proportion of all samples, and the success rate is the proportion of all samples whose calculated intervals contain the parameter, known as the confidence level. So after calculating the confidence interval, we usually say that "we are 95% (confidence level) sure that this interval contains the true mean". Now we have a visualization to play with and think about how this works.
+
+<iframe height = "400" width = "100%" frameborder = "no" src = "http://rconnect.bucknell.edu/content/650b6c76-0e26-4349-90e3-41e5f210d6b3"> </iframe>
+

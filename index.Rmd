@@ -1,0 +1,25 @@
+---
+title: "Data and Visualizations"
+description: |
+  This website includes some past data visualizations during the course MATH 230: Data Visualization and Computing. It also have data and visualizations about League of Legends Esports all around the world. I hope you enjoy it!
+site: distill::distill_website
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+
+# Learn more about creating websites with Distill at:
+# https://rstudio.github.io/distill/website.html
+
+# Learn more about publishing to GitHub Pages at:
+# https://rstudio.github.io/distill/publish_website.html#github-pages
+
+```
+
+![Data Visualizatioin](/Users/hengyang/Desktop/MATH 230/Distill Website/Terry_Yang_Distill_Website/datavizdance.jpg)
+
+As a student of MATH 230, learning about R-studio. This website includes some beautiful visualization from the course, for instance, art works using mathematics equations, Bucknell University theme, interesting plot I tried to duplicate, other plots I learnt through Google, and a interactive visualization talking about confidence intervals/levels, which is a topic in statistic. Statistical computing is an essential component of statistics and data literacy. During this course, I have learnt about both simulation and data visualization through the lens of statistical computing using the advanced statistical software language R. I have become efficient and proficient coders in the statistical language R and deepen my understanding of introductory statistics topics through simulation based learning and nonparametric methods. Go through the drop down links on the top right corner called $MATH230$ to get more informations.
+
+![League of Legends](/Users/hengyang/Desktop/MATH 230/Distill Website/Terry_Yang_Distill_Website/LOL.png)
+
+Also as a huge fan of League of Legends Esports, this website also have some data visualizations using the data set of Pro-League all around the world in season 12 of this game. Like all other sports, this game have a huge amount of audience all around the world, this sports has a trending development over the past few years. And as the Mid-Season Invitational of Season 13 has just began, more and more fans would like to get deeper into this game and this website will help with understanding League of Legends Esports by looking through and gathering the data of past season, season 12, mainly foucsing on champions. Go through the drop down links on the top right corner called $LOL$ $Eports$ to get more informations.

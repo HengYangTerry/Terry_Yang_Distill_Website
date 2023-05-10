@@ -1,0 +1,23 @@
+---
+title: "R Generative Art Work"
+description: |
+  Generative art works using R.
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+During the class of MATH230, we learnt about using R to make some generated art works. Here are three art works generated in r using codes. We used the package called "aRtsy". And I used the codes including "canvas_maze", "canvas_circlemap" and "canvas_function" to make these images.
+
+![LEATHAL MAZE](/Users/hengyang/Desktop/MATH 230/Distill Website/Terry_Yang_Distill_Website/art1.png)
+
+There is an old saying by Nietzsche, "When you look long into an abyss, the abyss looks into you". I created this image when I was thinking about this. If you try to look at the center of the maze, you can feel that the world is twisting and rotating. And when I do this, I feel some deep fear from the heart.
+
+![BUCKNELL IN FOG](/Users/hengyang/Desktop/MATH 230/Distill Website/Terry_Yang_Distill_Website/art2.png)
+
+I tried to create a image based on Bucknell theme. The first thought was the symbol of our university, and I tried to fit the colors and the "B" into it. I used the colors "blue", "orange", #0047AB" and "#FF8400", which best represents the colors for Bucknell. And in the end, I get this art work. If you look closer at this image, there is a huge "B" in this fog. And since we have capricious weather in Lewisburg, I believe foggy image fits the Bucknell theme.
+
+![DANCING CURVE](/Users/hengyang/Desktop/MATH 230/Distill Website/Terry_Yang_Distill_Website/art3.png)
+
+I generated this last art work using two mathematics equations, $x_i^2 - sin(y_i^2)$ and $cos(x_i^2) - log(y_i^2)$, and with the twist of code in R, I have this dancing curves which is very stretched lines. This is the art work that really made I feel like an artist.

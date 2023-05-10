@@ -1,0 +1,6 @@
+"0","ggplot() +"
+"0","  geom_histogram(aes(x = LOLesportS12$Winrate, y = ..density..), bins = 30, fill = ""peachpuff"", alpha = 0.75) + "
+"0","  geom_density(aes(x = LOLesportS12$Winrate), col = ""blue"") +"
+"0","  xlab(""Win Rates"") +"
+"0","  ggtitle(""Champion Win Rates"") + "
+"0","  theme_classic()"

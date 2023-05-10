@@ -1,0 +1,7 @@
+"0","temp1 = LOLesportS12[LOLesportS12$Picks >= 1500,]"
+"0","ggplot(data = temp1, aes(x = Picks, y = Bans, label = Champion, image = img)) +"
+"0","  geom_image() + "
+"0","  geom_text(hjust = 0.5, vjust=-1, size =2, color = ""red"") +"
+"0","  xlim(1500, 3000) + "
+"0","  ylim(-10, 3500) + "
+"0","  labs(x = ""Picks"", y = ""Bans"", title = ""Top Rank Champions"")"

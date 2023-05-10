@@ -1,0 +1,156 @@
+---
+title: "League of Legends Champions"
+description: |
+  Data and Visualizations of League of Legends Champions.
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+```{r}
+library(ggplot2)
+library(ggimage)
+library(fmsb)
+library(gridExtra)
+library(plotly)
+LOLesportS12 = read.csv("data.txt", header = TRUE, sep = "")
+img = NULL
+for (i in 1:nrow(LOLesportS12)) {
+  img[i] = paste(LOLesportS12$Champion[i], ".jpeg", sep = "")
+}
+max_min = data.frame(Champion = c("Max", "Min"), Winrate = c(max(LOLesportS12$Winrate), 0), KDA = c(max(LOLesportS12$KDA), 0), CSM = c(max(LOLesportS12$CSM), 0), GPM = c(max(LOLesportS12$GPM), 0), DPM = c(max(LOLesportS12$DPM), 0))
+LOLesportS12 = data.frame(LOLesportS12, img)
+df = rbind(max_min, LOLesportS12[LOLesportS12$Picks >= 1500, c("Champion", "Winrate", "KDA", "CSM", "GPM", "DPM")])
+rownames(df) = c("Max", "Min", "Zeri", "Gwen", "Nautilus", "Jinx", "Ahri", "Aphelios", "Viego", "Lee_Sin", "Wukong", "Gnar", "Xin_Zhao", "Leona")
+df = df[, c("Winrate", "KDA", "CSM", "GPM", "DPM")]
+df1 = df[3:14, ]
+```
+
+```{r}
+temp1 = LOLesportS12[LOLesportS12$Picks >= 1500,]
+ggplot(data = temp1, aes(x = Picks, y = Bans, label = Champion, image = img)) +
+  geom_image() + 
+  geom_text(hjust = 0.5, vjust=-1, size =2, color = "red") +
+  xlim(1500, 3000) + 
+  ylim(-10, 3500) + 
+  labs(x = "Picks", y = "Bans", title = "Top Rank Champions")
+```
+
+Here are the highest ranked or over powered champions in the game. We will be working on some reason about why these champions are high ranked or over powered. However, we are not focusing on the two support champions, Nautilus and Leona, they are high ranked in pick/ban phase because they are very useful in a team's line-up, but not because they have a strong champion status. And from the next radar chart, we can see that they do not have a high data with each corner.
+
+```{r}
+fig = plot_ly(data = df1, x = temp1$Picks, y = temp1$Ban,  type = 'scatter', mode = 'markers',
+        hoverinfo = 'text',
+        text = ~paste('</br> Champion: ', rownames(df1),
+                      '</br> Win Rate: ', Winrate, "%", 
+                      '</br> Kill Death Average: ', KDA,
+                      '</br> Creep Score per Minute: ', CSM,
+                      '</br> Gold per Minute: ', GPM,
+                      '</br> Damage to Enemy Champion per Minute: ', DPM))
+fig = fig %>% layout(title = 'Top Ranked Champions',
+         yaxis = list(title = 'Bans'),
+         xaxis = list(title = 'Picks'))
+fig
+```
+
+This interactive visualization has more specific data for these champions, including champion names, win rate, kill death average, creep score per minute, gold per minute, and damage to enemy champions per minute.
+
+In this radar chart, we have five data for each champion, win rate, kill death average, creep score per minute, gold per minute, and damage to enemy champions per minute. In this game, gamers gain creep score through killing minions in any lane, top, middle, or bottom, or killing neutral monsters in the jungle areas. Having high creep score means having more gold and more experience(XP), which will lead to having better items and having higher levels. we will talk about the relationship between creep score, gold, and experience at the very last part.
+
+```{r}
+create_beautiful_radarchart <- function(data, color = "#00AFBB", vlabels = colnames(data), vlcex = 0.7, caxislabels = NULL, title = NULL, ...){
+  radarchart(data, axistype = 1, pcol = color, pfcol = scales::alpha(color, 0.5), plwd = 0.5, plty = 1, cglcol = "grey", cglty = 1, cglwd = 0.8, axislabcol = "grey", vlcex = vlcex, vlabels = vlabels, caxislabels = caxislabels, title = title, ...)
+}
+
+colors <- c("red", "blue", "green", "orange", "peachpuff", "yellow", "purple", "black", "darkslateblue", "#00AFBB", "forestgreen", "gold4")
+
+titles <- c("Zeri", "Gwen", "Nautilus", "Jinx", "Ahri", "Aphelios", "Viego", "Lee Sin", "Wukong", "Gnar", "Xin Zhao", "Leona")
+
+op <- par(mar = c(1, 1, 1, 1))
+
+par(mfrow = c(3,4))
+
+for(i in 1:12){
+  create_beautiful_radarchart(
+    data = df[c(1, 2, i+2), ], caxislabels = c("", "", "", "", ""),
+    color = colors[i], title = titles[i]
+    )
+}
+
+par(op)
+```
+
+Between all these radar charts, we can see that all these champions have win rates at about 50%, since they are played more than 1500 games, their win rates get closer and closer to 50%, like repeated sampling in statistics, when we have more and more samplings, the graph gets closer and closer to normal distributed.
+
+And we can see from these charts, champions like Zeri, Gwen, Jinx, Aphelios and Ahri, they have CSM (creep score per minute) and GPM (gold per minute) near to the maximum of all champions, this means that these champions are good at clearing lanes and gaining gold. This is the first big measurement to determine whether a champion is high ranked or over powered.
+
+Secondly, we can see that champions like Zeri, Gwen, Jinx, Ahri, Aphelios, and Gnar, they have a DPM (damage to enemy champions per minute) near to the maximum of all champions, this means that these champions are good at causing damage and even kill more enemy champions, when they are present in the game, for most games, they are the center damage position in the team.
+
+Also, we can see that Zeri, Jinx and Ahri have the highest KDA (kill death average) among these champions, and since almost all these 15 champions are good at killing enemy champions, this means that they are good at escaping a fight that is not good or advantageous for them and therefore saving their lives from death.
+
+Last but not least, for jungle champions like Viego, Lee Sin, Wukong and Xin Zhao, even though they do not have a high CSM (creep score per minute), they still have a pretty high GPM (gold per minute), as they are catching lanes and finding opertunity to fight through out the game.  
+
+```{r}
+CSM = ggplot() +
+  geom_histogram(aes(x = LOLesportS12$CSM, y = ..density..), bins = 30, fill = "peachpuff", alpha = 0.75) + 
+  geom_density(aes(x = LOLesportS12$CSM), col = "blue") +
+  xlab("Creep Score per Minute") +
+  theme_classic()
+
+CSD = ggplot() +
+  geom_histogram(aes(x = LOLesportS12$CSD.15, y = ..density..), bins = 30, fill = "peachpuff", alpha = 0.75) + 
+  geom_density(aes(x = LOLesportS12$CSD.15), col = "blue") +
+  xlab("Creep Score Difference") +
+  theme_classic()
+
+GPM = ggplot() +
+  geom_histogram(aes(x = LOLesportS12$GPM, y = ..density..), bins = 30, fill = "peachpuff", alpha = 0.75) + 
+  geom_density(aes(x = LOLesportS12$GPM), col = "blue") +
+  xlab("Gold per Minute") +
+  theme_classic()
+
+GD = ggplot() +
+  geom_histogram(aes(x = LOLesportS12$GD.15, y = ..density..), bins = 30, fill = "peachpuff", alpha = 0.75) + 
+  geom_density(aes(x = LOLesportS12$GD.15), col = "blue") +
+  xlab("Gold Difference") +
+  theme_classic()
+
+KDA = ggplot() +
+  geom_histogram(aes(x = LOLesportS12$KDA[LOLesportS12$KDA != 0.0], y = ..density..), bins = 30, fill = "peachpuff", alpha = 0.75) + 
+  geom_density(aes(x = LOLesportS12$KDA), col = "blue") +
+  xlab("Champion KDA") +
+  theme_classic()
+
+DPM = ggplot() +
+  geom_histogram(aes(x = LOLesportS12$DPM, y = ..density..), bins = 30, fill = "peachpuff", alpha = 0.75) + 
+  geom_density(aes(x = LOLesportS12$DPM), col = "blue") +
+  xlab("Damage to Champion") +
+  theme_classic()
+
+grid.arrange(CSM, CSD, KDA, GPM, GD, DPM, ncol = 3)
+```
+
+Now, we look at the CSM (creep score per minute), CSD (creep score difference at 15 minutes), KDA (kill death average), GPM (gold per minute), GD (gold difference at 15 minute) and DPM (damage to enemy champion per minute). First, we compare the graphs of CSM and GPM, we can see that the density plot are similar with these two graphs, so we can say that there is a huge connection between creep score and gold. Second, if we look at the graphs of CSD and GD at the same time, we can see that most champions do not have a big creep score difference and gold difference, therefore we can say that champion strength is only a fragment of reasons to make a team's advantages greater, other reasons including player's ability and proficiency, decision making and game strategy. Lastly, if we look at the last two graphs, KDA and DPM, we can see that most champions have less data than the high ranked or over powered champions.
+
+```{r}
+a = ggplot(data = LOLesportS12, aes(x = CSD.15, y = GD.15, label = Champion, image = img)) +
+  geom_image() + 
+  geom_text(hjust = 0.5, vjust=-1, size =2, color = "red") +
+  geom_hline(yintercept = 0, color = "blue") + 
+  geom_vline(xintercept = 0, color = "green") +
+  geom_abline(intercept = 0, slope = 50, color = "peachpuff") + 
+  labs(x = "Creep Score Difference at 15 Minutes", y = "Gold Difference at 15 Minutes", title = "Creep Score vs. Gold")
+
+b = ggplot(data = LOLesportS12, aes(x = CSD.15, y = XPD.15, label = Champion, image = img)) +
+  geom_image() + 
+  geom_text(hjust = 0.5, vjust=-1, size =2, color = "red") +
+  geom_hline(yintercept = 0, color = "blue") + 
+  geom_vline(xintercept = 0, color = "green") +
+  geom_abline(intercept = 0, slope = 25, color = "peachpuff") + 
+  labs(x = "Creep Score Difference at 15 Minutes", y = "Experience Difference at 15 Minutes", title = "Creep Score vs. Experience")
+
+grid.arrange(a, b, ncol = 2)
+```
+
+In the very last part, we have some more graphs about the relationship creep score, gold and experience. From these two graphs, we can clearly see that there is a strong relationship between creep score and gold/experience, since creep score, killing minions or monsters is the most efficient and useful way to gain gold and experience.
