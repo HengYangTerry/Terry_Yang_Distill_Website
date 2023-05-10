@@ -12,3 +12,5 @@ Statistical Inference is the process of drawing conclusions about the population
 
 <iframe height = "400" width = "100%" frameborder = "no" src = "http://rconnect.bucknell.edu/content/650b6c76-0e26-4349-90e3-41e5f210d6b3"> </iframe>
 
+
+
